@@ -26,7 +26,8 @@ public class MemoService {
 
     @Transactional
     public List<MemoMapping> getMemos(){//조회
-        return memoRepository.findAllByOrderByModifiedAtDesc();
+        List<MemoMapping> allByOrderByModifiedAtDesc = memoRepository.findAllByOrderByModifiedAtDesc();
+        return allByOrderByModifiedAtDesc;
     }
 
     @Transactional
@@ -45,6 +46,7 @@ public class MemoService {
         Memo memo = memoRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("아이디가 존재하지 않습니다.")
         );
+
         String pwd = requestDto.findPwd(requestDto);
 
         if(pwd.equals(memo.getPwd())){
